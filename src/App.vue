@@ -7,11 +7,11 @@
     			<!--<p>Zaloguj się e-mailem: 
 				<input type="text" v-model="email">
 				<button @click = "loginWithEmail($event)"> Zaloguj się </button>	
-				
-				</p> -->
-				<login-form @login="loginWithEmail($event)" 
+								<login-form @login="loginWithEmail($event)" 
 							button-label="Rejestruję się"
 							header="Rejestracja"></login-form>
+				</p> -->
+
 				<login-form @login="loginWithEmail($event)" 
 							button-label="Loguję się"
 							header="logowanie"></login-form>
@@ -19,10 +19,11 @@
 		</div>
 		
 		<div v-else>
-		
 			<logout-form :username='email'
 						 @logout="logOutWithEmail()"> 
 			</logout-form>
+			<meeting-page>
+			</meeting-page>
 			<!-- <p>Witaj {{email}}</p>
 			<button @click = "logOutWithEmail()"> Wyloguj sie </button> -->
 		</div>
@@ -41,9 +42,10 @@
 import "milligram";
 import LoginForm from "./LoginForm";
 import LogoutForm from "./LogoutForm";
+import MeetingPage from "./MeetingPage";
 
 export default {
-	components: {LoginForm, LogoutForm},
+	components: {LoginForm, LogoutForm, MeetingPage},
 	data() {
 		return {
 			email: 'TwojaStaraToTwojStary',
