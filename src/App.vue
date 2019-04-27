@@ -2,20 +2,17 @@
 <!--  MDN web docs  -->
  	<div id="app">
     	<h1>{{logged}} Witaj w systemie do zapisów na zajęcia</h1>
-    	<p> 
-    	
 
     	<div v-if="logged == false">
-    		<p>Zaloguj się e-mailem: </p>
+    		<p>Zaloguj się e-mailem: 
 			<input type="text" v-model="email">
-			<button @click = "loginWithEmail()"> Zaloguj się </button>
-		
+			<button @click = "loginWithEmail()"> Zaloguj się </button>	
+			</p>	
 		</div>
-		<div v-else-if="logged == true">
+		<div v-else>
 			<p>Witaj {{email}}</p>
 			<button @click = "logOutWithEmail()"> Wyloguj sie </button>
 		</div>
-    	</p>
     	
     	<!--<input type="text" v-model="email">
     	<button @click = "alertMyEmail()">Zaloguj sie</button>
@@ -28,6 +25,8 @@
 
 
 <script>
+import "milligram";
+
 export default {
 	data() {
 		return {
@@ -44,6 +43,7 @@ export default {
 			this.logged = true;
 		},
 		logOutWithEmail() {
+			this.email = '';
 			this.logged = false;
 		}
 	}
