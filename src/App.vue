@@ -1,17 +1,30 @@
 <template>
-<!--  MDN web docs  -->
  	<div id="app">
-    	<h1>{{logged}} Witaj w systemie do zapisów na zajęcia</h1>
+    	<h1>Witaj w systemie do zapisów na zajęcia</h1>
 
-    	<div v-if="logged == false">
-    		<p>Zaloguj się e-mailem: 
-			<input type="text" v-model="email">
-			<button @click = "loginWithEmail()"> Zaloguj się </button>	
-			</p>	
+    	<div v-if="email.length == 0">
+    		<form @submit.prevent="">
+    			<!--<p>Zaloguj się e-mailem: 
+				<input type="text" v-model="email">
+				<button @click = "loginWithEmail($event)"> Zaloguj się </button>	
+				
+				</p> -->
+				<login-form @login="loginWithEmail($event)" 
+							button-label="Rejestruję się"
+							header="Rejestracja"></login-form>
+				<login-form @login="loginWithEmail($event)" 
+							button-label="Loguję się"
+							header="logowanie"></login-form>
+			</form>	
 		</div>
+		
 		<div v-else>
-			<p>Witaj {{email}}</p>
-			<button @click = "logOutWithEmail()"> Wyloguj sie </button>
+		
+			<logout-form :username='email'
+						 @logout="logOutWithEmail()"> 
+			</logout-form>
+			<!-- <p>Witaj {{email}}</p>
+			<button @click = "logOutWithEmail()"> Wyloguj sie </button> -->
 		</div>
     	
     	<!--<input type="text" v-model="email">
@@ -26,25 +39,26 @@
 
 <script>
 import "milligram";
+import LoginForm from "./LoginForm";
+import LogoutForm from "./LogoutForm";
 
 export default {
+	components: {LoginForm, LogoutForm},
 	data() {
 		return {
 			email: 'TwojaStaraToTwojStary',
 			password: '',
-			logged: false
 		};
 	},
 	methods: {
 		alertMyEmail() {
 		    alert(this.email);
 		},
-		loginWithEmail() {
-			this.logged = true;
+		loginWithEmail(username) {
+			this.email = username;
 		},
 		logOutWithEmail() {
 			this.email = '';
-			this.logged = false;
 		}
 	}
 }
